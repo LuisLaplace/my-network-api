@@ -1,4 +1,6 @@
 const { User, Thought } = require('../models');
+const handleError = require('../utils/errorHandler');
+const formatResponse = require('../utils/responseFormatter');
 
 module.exports = {
   getUsers(req, res) {
@@ -23,8 +25,8 @@ module.exports = {
   
   createUser(req, res) {
     User.create(req.body)
-      .then((user) => res.json(user))
-      .catch((err) => res.status(500).json(err));
+      .then((user) => res.json(formatResponse(user, 'User created successfully')))
+      .catch((err) => handleError(err, res));
   },
   
   updateUser(req, res) {

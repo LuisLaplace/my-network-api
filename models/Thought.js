@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema, model } = mongoose;
 const moment = require('moment');
+const formatDate = require('../utils/dateFormatter');
 
 // Reaction Schema
 const reactionSchema = new Schema(
@@ -21,7 +22,7 @@ const reactionSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
-      get: (timestamp) => moment(timestamp).format('MMM DD, YYYY [at] hh:mm a'),
+      get: (timestamp) => formatDate(timestamp),
     },
   },
   {
